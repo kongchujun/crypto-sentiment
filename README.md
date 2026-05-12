@@ -10,6 +10,12 @@ Stage 1 (current):
 - Post timestamps appear as markers overlaid on the price chart, with stacked offsets when timestamps collide
 - Posts and chart markers are bidirectionally highlighted on click
 
+## Screenshot
+
+Two cases (BTC and SOL) tracking 24h price action with their top X posts pulled in. Orange dots on the chart mark the post timestamps; clicking a post highlights its dot, and vice versa.
+
+![Crypto Sentiment dashboard](images/img.png)
+
 ## Stack
 
 - Backend: Python 3.11, FastAPI, SQLAlchemy 2 (async), asyncpg, Alembic, httpx
