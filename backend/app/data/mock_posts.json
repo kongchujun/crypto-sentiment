@@ -1,0 +1,562 @@
+{
+  "BTCUSDT": [
+    {
+      "id": "btc-1",
+      "author": "@whale_alert",
+      "content": "1,000 #BTC (62,341,200 USD) transferred from unknown wallet to Binance. Watch the order book closely tonight.",
+      "minutes_ago": 30,
+      "likes": 8420,
+      "retweets": 1530,
+      "url": "https://twitter.com/whale_alert/status/1"
+    },
+    {
+      "id": "btc-2",
+      "author": "@DocumentingBTC",
+      "content": "Bitcoin just reclaimed a key trend line on the 4h chart. Bulls are stepping back in. The next resistance is right above us.",
+      "minutes_ago": 120,
+      "likes": 5210,
+      "retweets": 820,
+      "url": "https://twitter.com/DocumentingBTC/status/2"
+    },
+    {
+      "id": "btc-3",
+      "author": "@PeterSchiff",
+      "content": "Bitcoin holders keep cheering every uptick but ignore the macro. Wait until rates pivot back hawkish and tell me how that store of value thesis holds up.",
+      "minutes_ago": 240,
+      "likes": 3110,
+      "retweets": 940,
+      "url": "https://twitter.com/PeterSchiff/status/3"
+    },
+    {
+      "id": "btc-4",
+      "author": "@MichaelSaylor",
+      "content": "There is no second best. #Bitcoin is digital property and the most pristine asset humanity has ever known. Stack accordingly.",
+      "minutes_ago": 240,
+      "likes": 9120,
+      "retweets": 2100,
+      "url": "https://twitter.com/MichaelSaylor/status/4"
+    },
+    {
+      "id": "btc-5",
+      "author": "@CryptoQuant_com",
+      "content": "Exchange BTC reserves continue their multi-year downtrend. Spot supply is thin – any sustained demand pulse should be amplified.",
+      "minutes_ago": 480,
+      "likes": 2870,
+      "retweets": 610,
+      "url": "https://twitter.com/CryptoQuant_com/status/5"
+    },
+    {
+      "id": "btc-6",
+      "author": "@APompliano",
+      "content": "If you are still arguing whether Bitcoin is here to stay in 2026, you have already lost the argument. The institutions made their decision.",
+      "minutes_ago": 900,
+      "likes": 4630,
+      "retweets": 770,
+      "url": "https://twitter.com/APompliano/status/6"
+    }
+  ],
+  "ETHUSDT": [
+    {
+      "id": "eth-1",
+      "author": "@VitalikButerin",
+      "content": "Quick note on the upcoming hardfork: blob throughput should roughly double, which means cheaper L2s for everyone.",
+      "minutes_ago": 45,
+      "likes": 12300,
+      "retweets": 2600,
+      "url": "https://twitter.com/VitalikButerin/status/1"
+    },
+    {
+      "id": "eth-2",
+      "author": "@ethereum",
+      "content": "Reminder that staking ETH helps secure the network. Withdrawals remain instant and the validator queue is back to single digits.",
+      "minutes_ago": 180,
+      "likes": 6400,
+      "retweets": 1200,
+      "url": "https://twitter.com/ethereum/status/2"
+    },
+    {
+      "id": "eth-3",
+      "author": "@sassal0x",
+      "content": "ETH/BTC is curling up from a multi-year low. Rotation back into majors might just be starting.",
+      "minutes_ago": 180,
+      "likes": 3800,
+      "retweets": 540,
+      "url": "https://twitter.com/sassal0x/status/3"
+    },
+    {
+      "id": "eth-4",
+      "author": "@DefiIgnas",
+      "content": "Liquid restaking TVL just printed an all-time high. Capital is clearly flowing back into ETH-denominated yield.",
+      "minutes_ago": 360,
+      "likes": 2100,
+      "retweets": 410,
+      "url": "https://twitter.com/DefiIgnas/status/4"
+    },
+    {
+      "id": "eth-5",
+      "author": "@CryptoCobain",
+      "content": "Everyone calling for ETH to flip BTC has been wrong for 7 years. Maybe stop coping and just trade the range.",
+      "minutes_ago": 720,
+      "likes": 5700,
+      "retweets": 880,
+      "url": "https://twitter.com/CryptoCobain/status/5"
+    },
+    {
+      "id": "eth-6",
+      "author": "@DegenSpartan",
+      "content": "ETH is the only L1 that has consistently shipped, even when it was unpopular to say. Bear that in mind next time the noise gets loud.",
+      "minutes_ago": 1080,
+      "likes": 3400,
+      "retweets": 510,
+      "url": "https://twitter.com/DegenSpartan/status/6"
+    }
+  ],
+  "BNBUSDT": [
+    {
+      "id": "bnb-1",
+      "author": "@cz_binance",
+      "content": "BNB Chain mainnet upgrade completed without issues. Block times are tighter and gas remains negligible.",
+      "minutes_ago": 60,
+      "likes": 9800,
+      "retweets": 1800,
+      "url": "https://twitter.com/cz_binance/status/1"
+    },
+    {
+      "id": "bnb-2",
+      "author": "@binance",
+      "content": "Burned 1,432,910 BNB this quarter. Supply now under 140M and shrinking on schedule.",
+      "minutes_ago": 200,
+      "likes": 4200,
+      "retweets": 720,
+      "url": "https://twitter.com/binance/status/2"
+    },
+    {
+      "id": "bnb-3",
+      "author": "@BNBCHAIN",
+      "content": "New Greenfield storage SDK is live. Build verifiable data apps without leaving the BNB ecosystem.",
+      "minutes_ago": 320,
+      "likes": 1500,
+      "retweets": 310,
+      "url": "https://twitter.com/BNBCHAIN/status/3"
+    },
+    {
+      "id": "bnb-4",
+      "author": "@CryptoMichNL",
+      "content": "BNB chart looking the cleanest it has in months. Higher lows since the dip, watching for a breakout.",
+      "minutes_ago": 540,
+      "likes": 2300,
+      "retweets": 380,
+      "url": "https://twitter.com/CryptoMichNL/status/4"
+    },
+    {
+      "id": "bnb-5",
+      "author": "@TheCryptoLark",
+      "content": "BNB historically front-runs altseason. If you are looking for an early signal, this is the one to watch.",
+      "minutes_ago": 800,
+      "likes": 1900,
+      "retweets": 290,
+      "url": "https://twitter.com/TheCryptoLark/status/5"
+    },
+    {
+      "id": "bnb-6",
+      "author": "@CryptoBusy",
+      "content": "Quietly, BNB has been outperforming most majors over the last 30 days. Funding stayed neutral too – healthy move.",
+      "minutes_ago": 1200,
+      "likes": 1200,
+      "retweets": 180,
+      "url": "https://twitter.com/CryptoBusy/status/6"
+    }
+  ],
+  "SOLUSDT": [
+    {
+      "id": "sol-1",
+      "author": "@solana",
+      "content": "Network throughput hit a new sustained TPS record today. Firedancer rollout continues across validators.",
+      "minutes_ago": 25,
+      "likes": 11200,
+      "retweets": 2400,
+      "url": "https://twitter.com/solana/status/1"
+    },
+    {
+      "id": "sol-2",
+      "author": "@aeyakovenko",
+      "content": "Latency below 400ms end-to-end for the last hour across the validator set. We keep grinding.",
+      "minutes_ago": 150,
+      "likes": 6500,
+      "retweets": 1100,
+      "url": "https://twitter.com/aeyakovenko/status/2"
+    },
+    {
+      "id": "sol-3",
+      "author": "@MustStopMurad",
+      "content": "Solana memecoin volume just topped Ethereum spot DEX volume again. Liquidity follows attention.",
+      "minutes_ago": 300,
+      "likes": 7100,
+      "retweets": 1500,
+      "url": "https://twitter.com/MustStopMurad/status/3"
+    },
+    {
+      "id": "sol-4",
+      "author": "@AnsemSOL",
+      "content": "SOL/BTC continues to bleed but underlying fundamentals never been stronger. Always the same – price follows.",
+      "minutes_ago": 600,
+      "likes": 4900,
+      "retweets": 820,
+      "url": "https://twitter.com/AnsemSOL/status/4"
+    },
+    {
+      "id": "sol-5",
+      "author": "@kohlersays",
+      "content": "Spot Solana ETF approval odds quietly climbing on prediction markets. Worth keeping on your radar.",
+      "minutes_ago": 900,
+      "likes": 2800,
+      "retweets": 430,
+      "url": "https://twitter.com/kohlersays/status/5"
+    },
+    {
+      "id": "sol-6",
+      "author": "@gainzy222",
+      "content": "Every dip in SOL gets bought faster than the last one. Tape doesn't lie.",
+      "minutes_ago": 1320,
+      "likes": 3300,
+      "retweets": 500,
+      "url": "https://twitter.com/gainzy222/status/6"
+    }
+  ],
+  "XRPUSDT": [
+    {
+      "id": "xrp-1",
+      "author": "@Ripple",
+      "content": "Cross-border settlement volume on XRP Ledger crossed a fresh quarterly high. The corridor expansion is paying off.",
+      "minutes_ago": 90,
+      "likes": 5400,
+      "retweets": 900,
+      "url": "https://twitter.com/Ripple/status/1"
+    },
+    {
+      "id": "xrp-2",
+      "author": "@JoelKatz",
+      "content": "Question I keep getting: yes, XLS-30 AMM continues to roll out smoothly. No, we are not slowing down.",
+      "minutes_ago": 210,
+      "likes": 2700,
+      "retweets": 360,
+      "url": "https://twitter.com/JoelKatz/status/2"
+    },
+    {
+      "id": "xrp-3",
+      "author": "@bgarlinghouse",
+      "content": "Regulatory clarity is finally normalising in the US for digital assets. Long road, but the destination matters.",
+      "minutes_ago": 480,
+      "likes": 8800,
+      "retweets": 1700,
+      "url": "https://twitter.com/bgarlinghouse/status/3"
+    },
+    {
+      "id": "xrp-4",
+      "author": "@WrathofKahneman",
+      "content": "XRP holders survived three bear markets and a multi-year lawsuit. Hard to faze this crowd at this point.",
+      "minutes_ago": 700,
+      "likes": 1800,
+      "retweets": 240,
+      "url": "https://twitter.com/WrathofKahneman/status/4"
+    },
+    {
+      "id": "xrp-5",
+      "author": "@CryptoEri",
+      "content": "ISO 20022 migration deadlines hitting in core financial messaging networks. XRP positioned for that rail.",
+      "minutes_ago": 1000,
+      "likes": 2100,
+      "retweets": 320,
+      "url": "https://twitter.com/CryptoEri/status/5"
+    },
+    {
+      "id": "xrp-6",
+      "author": "@digitalassetbuy",
+      "content": "Volume on XRPUSDT spiking on Asian session opens for two weeks straight. Someone is accumulating quietly.",
+      "minutes_ago": 1380,
+      "likes": 1500,
+      "retweets": 210,
+      "url": "https://twitter.com/digitalassetbuy/status/6"
+    }
+  ],
+  "ADAUSDT": [
+    {
+      "id": "ada-1",
+      "author": "@IOHK_Charles",
+      "content": "Hydra heads continue to scale. Throughput numbers in production environments are now comfortably beating early benchmarks.",
+      "minutes_ago": 70,
+      "likes": 6100,
+      "retweets": 1100,
+      "url": "https://twitter.com/IOHK_Charles/status/1"
+    },
+    {
+      "id": "ada-2",
+      "author": "@Cardano",
+      "content": "On-chain governance has officially activated. Cardano is now a fully community-governed network.",
+      "minutes_ago": 260,
+      "likes": 4400,
+      "retweets": 820,
+      "url": "https://twitter.com/Cardano/status/2"
+    },
+    {
+      "id": "ada-3",
+      "author": "@danny_cryptofx",
+      "content": "ADA chart is winding tighter than a coiled spring. Whatever side breaks first will move fast.",
+      "minutes_ago": 380,
+      "likes": 1900,
+      "retweets": 260,
+      "url": "https://twitter.com/danny_cryptofx/status/3"
+    },
+    {
+      "id": "ada-4",
+      "author": "@ADAWhale",
+      "content": "Stake pool participation rate is back over 70%. Decentralisation metric is healthy heading into the next epoch.",
+      "minutes_ago": 600,
+      "likes": 1100,
+      "retweets": 170,
+      "url": "https://twitter.com/ADAWhale/status/4"
+    },
+    {
+      "id": "ada-5",
+      "author": "@DCInvestor",
+      "content": "Reminder that Cardano holders have one of the lowest sell pressure profiles in the market. Diamond hands.",
+      "minutes_ago": 880,
+      "likes": 2100,
+      "retweets": 340,
+      "url": "https://twitter.com/DCInvestor/status/5"
+    },
+    {
+      "id": "ada-6",
+      "author": "@CryptoKaleo",
+      "content": "Watching ADA reclaim a multi-month structure level. Risk/reward starts to look interesting again.",
+      "minutes_ago": 1260,
+      "likes": 2600,
+      "retweets": 430,
+      "url": "https://twitter.com/CryptoKaleo/status/6"
+    }
+  ],
+  "DOGEUSDT": [
+    {
+      "id": "doge-1",
+      "author": "@elonmusk",
+      "content": "Doge to the moon, but only after we finish the rocket. Patience, my fellow shibes.",
+      "minutes_ago": 15,
+      "likes": 152000,
+      "retweets": 22000,
+      "url": "https://twitter.com/elonmusk/status/1"
+    },
+    {
+      "id": "doge-2",
+      "author": "@dogecoin",
+      "content": "do only good everyday. Reminder that Dogecoin doesn't take itself too seriously, but the community does build.",
+      "minutes_ago": 180,
+      "likes": 18000,
+      "retweets": 3400,
+      "url": "https://twitter.com/dogecoin/status/2"
+    },
+    {
+      "id": "doge-3",
+      "author": "@BillyM2k",
+      "content": "DOGE tipping bots are getting popular again on social platforms. Small, but it's the spirit of the coin.",
+      "minutes_ago": 320,
+      "likes": 4100,
+      "retweets": 720,
+      "url": "https://twitter.com/BillyM2k/status/3"
+    },
+    {
+      "id": "doge-4",
+      "author": "@ShibetoshiNakamoto",
+      "content": "I made the dog coin as a joke. The fact that you all are still here makes it everything but a joke.",
+      "minutes_ago": 540,
+      "likes": 9300,
+      "retweets": 1600,
+      "url": "https://twitter.com/ShibetoshiNakamoto/status/4"
+    },
+    {
+      "id": "doge-5",
+      "author": "@MattWallace888",
+      "content": "Volume spike on DOGE this past hour is the biggest we've seen since the last leg up. Bookmark this.",
+      "minutes_ago": 720,
+      "likes": 3500,
+      "retweets": 540,
+      "url": "https://twitter.com/MattWallace888/status/5"
+    },
+    {
+      "id": "doge-6",
+      "author": "@TheCryptoDog",
+      "content": "Whenever DOGE leads volume on a green day, beware – usually means we're near a local top.",
+      "minutes_ago": 1180,
+      "likes": 4700,
+      "retweets": 780,
+      "url": "https://twitter.com/TheCryptoDog/status/6"
+    }
+  ],
+  "AVAXUSDT": [
+    {
+      "id": "avax-1",
+      "author": "@avax",
+      "content": "Subnet count hit a new record this morning. Game studios continue to lead the deployment wave.",
+      "minutes_ago": 80,
+      "likes": 4900,
+      "retweets": 870,
+      "url": "https://twitter.com/avax/status/1"
+    },
+    {
+      "id": "avax-2",
+      "author": "@el33th4xor",
+      "content": "Snowman++ has been running silently for weeks in production. Block times are now even smoother under load.",
+      "minutes_ago": 220,
+      "likes": 3700,
+      "retweets": 510,
+      "url": "https://twitter.com/el33th4xor/status/2"
+    },
+    {
+      "id": "avax-3",
+      "author": "@TheCryptoLark",
+      "content": "AVAX/BTC quietly putting in a higher low. Watching this one carefully into the next majors leg.",
+      "minutes_ago": 420,
+      "likes": 1900,
+      "retweets": 280,
+      "url": "https://twitter.com/TheCryptoLark/status/3"
+    },
+    {
+      "id": "avax-4",
+      "author": "@CryptoBanterGroup",
+      "content": "Institutional flows into AVAX subnets are getting harder to ignore. RWA play is real.",
+      "minutes_ago": 650,
+      "likes": 2400,
+      "retweets": 360,
+      "url": "https://twitter.com/CryptoBanterGroup/status/4"
+    },
+    {
+      "id": "avax-5",
+      "author": "@CryptoWendyO",
+      "content": "Anyone trading AVAX needs to respect the 4h close. That has been the cleanest signal for months.",
+      "minutes_ago": 900,
+      "likes": 1300,
+      "retweets": 190,
+      "url": "https://twitter.com/CryptoWendyO/status/5"
+    },
+    {
+      "id": "avax-6",
+      "author": "@avalabsofficial",
+      "content": "Developer count on Avalanche grew 38% YoY. The pipeline of subnets coming online next quarter is the biggest yet.",
+      "minutes_ago": 1320,
+      "likes": 2200,
+      "retweets": 340,
+      "url": "https://twitter.com/avalabsofficial/status/6"
+    }
+  ],
+  "DOTUSDT": [
+    {
+      "id": "dot-1",
+      "author": "@Polkadot",
+      "content": "Asynchronous backing fully rolled out. Parachain throughput effectively doubles starting this era.",
+      "minutes_ago": 100,
+      "likes": 5800,
+      "retweets": 1100,
+      "url": "https://twitter.com/Polkadot/status/1"
+    },
+    {
+      "id": "dot-2",
+      "author": "@gavofyork",
+      "content": "JAM whitepaper progress continues. We are reshaping how scalable smart contract platforms can look.",
+      "minutes_ago": 240,
+      "likes": 4400,
+      "retweets": 760,
+      "url": "https://twitter.com/gavofyork/status/2"
+    },
+    {
+      "id": "dot-3",
+      "author": "@ParityTech",
+      "content": "Coretime sales for the upcoming cycle just kicked off. Allocations going faster than expected.",
+      "minutes_ago": 400,
+      "likes": 1500,
+      "retweets": 240,
+      "url": "https://twitter.com/ParityTech/status/3"
+    },
+    {
+      "id": "dot-4",
+      "author": "@KusamaNetwork",
+      "content": "Reminder: Kusama is still the canary network. New runtime gets battle-tested here before reaching Polkadot.",
+      "minutes_ago": 620,
+      "likes": 1100,
+      "retweets": 160,
+      "url": "https://twitter.com/KusamaNetwork/status/4"
+    },
+    {
+      "id": "dot-5",
+      "author": "@DotMarketCap",
+      "content": "OpenGov participation rate ticked above 28% this month. Highest in over a year.",
+      "minutes_ago": 880,
+      "likes": 900,
+      "retweets": 140,
+      "url": "https://twitter.com/DotMarketCap/status/5"
+    },
+    {
+      "id": "dot-6",
+      "author": "@PolkadotInsider",
+      "content": "Underrated stat: number of active parachains is at an all-time high. Ecosystem just keeps building.",
+      "minutes_ago": 1300,
+      "likes": 1300,
+      "retweets": 210,
+      "url": "https://twitter.com/PolkadotInsider/status/6"
+    }
+  ],
+  "TRXUSDT": [
+    {
+      "id": "trx-1",
+      "author": "@justinsuntron",
+      "content": "TRON-issued USDT supply hits another all-time high. Stablecoin rails on TRON keep doing the heavy lifting globally.",
+      "minutes_ago": 40,
+      "likes": 7200,
+      "retweets": 1300,
+      "url": "https://twitter.com/justinsuntron/status/1"
+    },
+    {
+      "id": "trx-2",
+      "author": "@trondao",
+      "content": "Daily active addresses on TRON above 2.5M for two weeks straight. Payment use case is clearly here to stay.",
+      "minutes_ago": 200,
+      "likes": 3300,
+      "retweets": 520,
+      "url": "https://twitter.com/trondao/status/2"
+    },
+    {
+      "id": "trx-3",
+      "author": "@coin_bureau",
+      "content": "Whatever your opinion of TRX, the chain is unmissable when you look at stablecoin transfer volume by network.",
+      "minutes_ago": 380,
+      "likes": 2800,
+      "retweets": 420,
+      "url": "https://twitter.com/coin_bureau/status/3"
+    },
+    {
+      "id": "trx-4",
+      "author": "@TronOfficial",
+      "content": "Sun-1 sidechain throughput upgrades complete. Average confirmation time below 1.5s in production.",
+      "minutes_ago": 540,
+      "likes": 1400,
+      "retweets": 210,
+      "url": "https://twitter.com/TronOfficial/status/4"
+    },
+    {
+      "id": "trx-5",
+      "author": "@CryptoMessiah",
+      "content": "TRX has quietly outperformed half of the top 20 over the last 6 months. Boring, but boring works.",
+      "minutes_ago": 800,
+      "likes": 1800,
+      "retweets": 280,
+      "url": "https://twitter.com/CryptoMessiah/status/5"
+    },
+    {
+      "id": "trx-6",
+      "author": "@TheBlock__",
+      "content": "TRON's revenue from network fees rivals the top L1s this quarter. Underrated on revenue metrics.",
+      "minutes_ago": 1200,
+      "likes": 2400,
+      "retweets": 360,
+      "url": "https://twitter.com/TheBlock__/status/6"
+    }
+  ]
+}

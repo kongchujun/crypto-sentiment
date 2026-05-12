@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+.python-version
+
+# Env
+.env
+.env.local
+
+# Node / Vue
+node_modules/
+dist/
+.vite/
+*.local
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
