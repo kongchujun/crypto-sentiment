@@ -1,11 +1,36 @@
 from __future__ import annotations
 
+import asyncio
+import logging
+from contextlib import asynccontextmanager
+from collections.abc import AsyncIterator
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes_cases import router as cases_router
 from app.api.routes_cryptos import router as cryptos_router
 from app.core.config import get_settings
+from app.services.x_posts_fetcher import start_background_fetcher
+
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    settings = get_settings()
+    fetcher_task = start_background_fetcher(settings)
+    try:
+        yield
+    finally:
+        if fetcher_task is not None:
+            fetcher_task.cancel()
+            try:
+                await fetcher_task
+            except asyncio.CancelledError:
+                pass
+            except Exception:  # pragma: no cover - defensive on shutdown
+                logger.exception("x-fetch: error while awaiting cancellation")
 
 
 def create_app() -> FastAPI:
@@ -14,6 +39,7 @@ def create_app() -> FastAPI:
         title="Crypto Sentiment API",
         version="0.1.0",
         description="Backend for crypto + X (Twitter) sentiment panels.",
+        lifespan=lifespan,
     )
 
     app.add_middleware(
