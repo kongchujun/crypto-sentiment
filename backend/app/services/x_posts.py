@@ -1,10 +1,7 @@
-"""X (Twitter) post providers.
+"""X (Twitter) post providers for the /cryptos/{symbol}/posts API.
 
-Stage 1 ships only a mock provider that reads fixture data from
-`app/data/mock_posts.json`. The abstract base class fixes the contract for the
-future real provider (X API v2, Apify, etc.). Each fixture entry stores a
-`minutes_ago` offset rather than an absolute timestamp so post times always
-land within the last 24h relative to "now".
+Posts are fetched on demand and returned to the client only; nothing is
+persisted to Postgres.
 """
 
 from __future__ import annotations
@@ -16,8 +13,10 @@ from pathlib import Path
 
 from fastapi import HTTPException
 
-from app.core.cryptos import SUPPORTED_SYMBOLS
+from app.core.config import Settings, get_settings
+from app.core.cryptos import get_crypto
 from app.schemas.post import XPost
+from app.services.twitterapi_io import TwitterApiIoClient, TwitterApiIoError
 
 _MOCK_PATH = Path(__file__).resolve().parent.parent / "data" / "mock_posts.json"
 
@@ -26,6 +25,39 @@ class XPostsProvider(ABC):
     @abstractmethod
     async def top_posts(self, symbol: str, limit: int = 5) -> list[XPost]:
         """Return the top `limit` posts for `symbol` ordered by hotness."""
+
+
+class TwitterApiIoPostsProvider(XPostsProvider):
+    """Fetch posts live from twitterapi.io when the UI requests them."""
+
+    def __init__(self, settings: Settings) -> None:
+        if not settings.twitterapi_io_key:
+            raise ValueError("TWITTERAPI_IO_KEY is required")
+        self._client = TwitterApiIoClient(api_key=settings.twitterapi_io_key)
+
+    async def top_posts(self, symbol: str, limit: int = 5) -> list[XPost]:
+        meta = get_crypto(symbol)
+        short = meta.base_asset if meta is not None else symbol.upper().removesuffix("USDT")
+        try:
+            rows = await self._client.fetch_top_posts(short, limit=limit)
+        except TwitterApiIoError as exc:
+            raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+        posts: list[XPost] = []
+        for row in rows:
+            created_at = row["created_at"]
+            posts.append(
+                XPost(
+                    id=row["id"],
+                    author=row["author_handle"],
+                    content=row["content"],
+                    created_at=int(created_at.timestamp() * 1000),
+                    likes=row["likes"],
+                    retweets=row["retweets"],
+                    url=row["url"],
+                )
+            )
+        return posts
 
 
 class MockXPostsProvider(XPostsProvider):
@@ -40,12 +72,8 @@ class MockXPostsProvider(XPostsProvider):
         return self._fixtures
 
     async def top_posts(self, symbol: str, limit: int = 5) -> list[XPost]:
-        upper = symbol.upper()
-        if upper not in SUPPORTED_SYMBOLS:
-            raise HTTPException(status_code=400, detail=f"unsupported symbol: {symbol}")
-
         fixtures = self._load()
-        raw = fixtures.get(upper, [])
+        raw = fixtures.get(symbol.upper(), [])
         now_ms = int(time.time() * 1000)
         posts: list[XPost] = []
         for row in raw:
@@ -71,5 +99,9 @@ _provider: XPostsProvider | None = None
 def get_x_posts_provider() -> XPostsProvider:
     global _provider
     if _provider is None:
-        _provider = MockXPostsProvider()
+        settings = get_settings()
+        if settings.twitterapi_io_key:
+            _provider = TwitterApiIoPostsProvider(settings)
+        else:
+            _provider = MockXPostsProvider()
     return _provider

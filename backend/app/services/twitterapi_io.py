@@ -141,7 +141,7 @@ class TwitterApiIoClient:
         *,
         limit: int = 20,
         hours: int = 24,
-        lang: str = "en",
+        lang: str | None = None,
         min_faves: int = 0,
     ) -> list[dict[str, Any]]:
         """Return up to ``limit`` normalised tweets sorted by likes desc."""
