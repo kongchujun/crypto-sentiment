@@ -6,9 +6,10 @@ Stage 1 (current):
 
 - Add a "case" by picking from the top 10 cryptocurrencies
 - Each case becomes a panel showing a 24h, 15-minute resolution price line chart (Binance data)
-- A "Fetch X posts" button pulls the top 5 hottest posts (mocked for now) for that crypto
+- A "Fetch X posts" button pulls the top 5 hottest posts for that crypto (live from twitterapi.io when `TWITTERAPI_IO_KEY` is set; mock fixtures otherwise)
 - Post timestamps appear as markers overlaid on the price chart, with stacked offsets when timestamps collide
 - Posts and chart markers are bidirectionally highlighted on click
+- X posts are returned to the UI only; they are not saved to Postgres yet
 
 ## Screenshot
 
@@ -45,6 +46,18 @@ pnpm dev
 - API docs: http://localhost:8000/docs
 - Web app: http://localhost:5173
 
+## From data sources to the web app
+
+| What you see | Source | What you need |
+| --- | --- | --- |
+| 24h price chart | [Binance](https://www.binance.com) public REST API | Nothing extra for local dev (`BINANCE_API_BASE` defaults to `https://api.binance.com`) |
+| X posts on demand | [twitterapi.io](https://twitterapi.io) | Sign up, copy your API key into `backend/.env` as `TWITTERAPI_IO_KEY` |
+| Saved cases | PostgreSQL | `docker compose up -d postgres` and `alembic upgrade head` |
+
+**Path to the UI:** start Postgres, the backend on port 8000, and the frontend dev server on port 5173, then open http://localhost:5173. Add a case to load klines from Binance. Click **Fetch X posts**; the frontend calls `/api/cryptos/{symbol}/posts`, the backend calls twitterapi.io, and the response is shown in the list and on the chart. The Vite dev server proxies `/api` to `http://localhost:8000`.
+
+If `TWITTERAPI_IO_KEY` is empty, the same button still works but the backend serves mock post fixtures instead of calling twitterapi.io.
+
 ## Project layout
 
 ```
@@ -55,7 +68,7 @@ docker-compose.yml  Postgres for local dev
 
 ## Roadmap
 
-- Replace `MockXPostsProvider` with a real X data source
+- Persist fetched X posts in Postgres
 - Add authentication and per-user `user_id`
 - Stream realtime klines via Binance WebSocket
 - Run sentiment analysis on posts and color-code scatter markers by sentiment
