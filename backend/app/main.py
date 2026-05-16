@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes_cases import router as cases_router
 from app.api.routes_cryptos import router as cryptos_router
+from app.api.routes_prediction import router as prediction_router
 from app.core.config import get_settings
 
 
@@ -30,6 +31,7 @@ def create_app() -> FastAPI:
 
     app.include_router(cryptos_router, prefix="/api")
     app.include_router(cases_router, prefix="/api")
+    app.include_router(prediction_router, prefix="/api")
     return app
 
 

@@ -24,3 +24,29 @@ export interface Case {
   symbol: string
   created_at: string
 }
+
+export interface ForecastPoint {
+  open_time: number
+  price: number
+}
+
+export type PredictionDirection = 'bullish' | 'bearish' | 'neutral'
+
+export interface PricePrediction {
+  direction: PredictionDirection
+  confidence: number
+  horizon_hours: number
+  summary: string
+  forecast_points: ForecastPoint[]
+  model: string
+}
+
+export interface ModelOption {
+  id: string
+  label: string
+}
+
+export interface ModelsResponse {
+  models: ModelOption[]
+  default_model: string
+}

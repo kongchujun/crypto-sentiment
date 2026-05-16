@@ -23,9 +23,28 @@ class Settings(BaseSettings):
     # falls back to mock fixture data.
     twitterapi_io_key: str = Field(default="", alias="TWITTERAPI_IO_KEY")
 
+    openrouter_api_key: str = Field(default="", alias="OPENROUTER_API_KEY")
+    openrouter_base_url: str = Field(
+        default="https://openrouter.ai/api/v1", alias="OPENROUTER_BASE_URL"
+    )
+    openrouter_default_model: str = Field(
+        default="openai/gpt-4o-mini", alias="OPENROUTER_DEFAULT_MODEL"
+    )
+    openrouter_models: str = Field(
+        default=(
+            "openai/gpt-4o-mini,openai/gpt-4o,"
+            "anthropic/claude-3.5-sonnet,google/gemini-2.0-flash-001"
+        ),
+        alias="OPENROUTER_MODELS",
+    )
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+
+    @property
+    def openrouter_models_list(self) -> list[str]:
+        return [m.strip() for m in self.openrouter_models.split(",") if m.strip()]
 
 
 @lru_cache(maxsize=1)

@@ -11,7 +11,7 @@ import {
 } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 
-import type { KlinePoint, XPost } from '@/types'
+import type { KlinePoint, PricePrediction, XPost } from '@/types'
 import { computeScatterPoints } from './scatterPoints'
 
 echarts.use([
@@ -28,6 +28,7 @@ echarts.use([
 const props = defineProps<{
   klines: KlinePoint[]
   posts: XPost[]
+  prediction: PricePrediction | null
   highlightedPostId: string | null
   symbol: string
 }>()
@@ -43,12 +44,93 @@ const lineSeriesData = computed(() =>
 
 const scatterPoints = computed(() => computeScatterPoints(props.klines, props.posts))
 
+const forecastColor = computed(() => {
+  if (!props.prediction) return '#909399'
+  const map = { bullish: '#67c23a', bearish: '#f56c6c', neutral: '#909399' } as const
+  return map[props.prediction.direction]
+})
+
+const forecastSeriesData = computed(() => {
+  if (!props.prediction || props.klines.length === 0) return []
+  const last = props.klines[props.klines.length - 1]
+  const anchor: [number, number] = [last.open_time, last.close]
+  const points: [number, number][] = props.prediction.forecast_points.map((p) => [
+    p.open_time,
+    p.price,
+  ])
+  return [anchor, ...points]
+})
+
 function buildOption(): echarts.EChartsCoreOption {
   const postById = new Map(props.posts.map((p) => [p.id, p]))
   const highlightedId = props.highlightedPostId
 
+  const series: Record<string, unknown>[] = [
+    {
+      name: 'Price',
+      type: 'line',
+      showSymbol: false,
+      smooth: true,
+      sampling: 'lttb',
+      data: lineSeriesData.value,
+      lineStyle: { width: 2, color: '#409eff' },
+      areaStyle: {
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            { offset: 0, color: 'rgba(64,158,255,0.25)' },
+            { offset: 1, color: 'rgba(64,158,255,0)' },
+          ],
+        },
+      },
+    },
+    {
+      name: 'Posts',
+      type: 'scatter',
+      symbol: 'circle',
+      symbolSize: (_value: unknown, params: any) =>
+        params?.data?.postId === highlightedId ? 18 : 12,
+      itemStyle: {
+        color: (params: any) =>
+          params?.data?.postId === highlightedId ? '#f56c6c' : '#e6a23c',
+        borderColor: '#fff',
+        borderWidth: 2,
+        shadowBlur: 6,
+        shadowColor: 'rgba(230,162,60,0.4)',
+      },
+      emphasis: { scale: 1.2 },
+      z: 5,
+      data: scatterPoints.value,
+    },
+  ]
+
+  if (forecastSeriesData.value.length > 0) {
+    series.push({
+      name: 'Forecast',
+      type: 'line',
+      showSymbol: true,
+      symbolSize: 6,
+      smooth: false,
+      data: forecastSeriesData.value,
+      lineStyle: {
+        type: 'dashed',
+        width: 2,
+        color: forecastColor.value,
+      },
+      itemStyle: { color: forecastColor.value },
+      z: 4,
+    })
+  }
+
   return {
     grid: { left: 56, right: 24, top: 24, bottom: 48 },
+    legend: props.prediction
+      ? { data: ['Price', 'Posts', 'Forecast'], top: 0, right: 8 }
+      : undefined,
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'cross' },
@@ -59,10 +141,15 @@ function buildOption(): echarts.EChartsCoreOption {
           const time = new Date(p.value[0]).toLocaleString()
           if (p.seriesName === 'Price') {
             line.push(`<b>${time}</b><br/>Price: ${Number(p.value[1]).toFixed(4)}`)
+          } else if (p.seriesName === 'Forecast') {
+            line.push(
+              `<b>${time}</b><br/>Predicted: ${Number(p.value[1]).toFixed(4)}`,
+            )
           } else if (p.seriesName === 'Posts' && p.data?.postId) {
             const post = postById.get(p.data.postId)
             if (post) {
-              const preview = post.content.length > 80 ? `${post.content.slice(0, 80)}…` : post.content
+              const preview =
+                post.content.length > 80 ? `${post.content.slice(0, 80)}…` : post.content
               line.push(`<b>${post.author}</b><br/>${preview}`)
             }
           }
@@ -85,48 +172,7 @@ function buildOption(): echarts.EChartsCoreOption {
       { type: 'inside', throttle: 50 },
       { type: 'slider', height: 18, bottom: 12 },
     ],
-    series: [
-      {
-        name: 'Price',
-        type: 'line',
-        showSymbol: false,
-        smooth: true,
-        sampling: 'lttb',
-        data: lineSeriesData.value,
-        lineStyle: { width: 2, color: '#409eff' },
-        areaStyle: {
-          color: {
-            type: 'linear',
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              { offset: 0, color: 'rgba(64,158,255,0.25)' },
-              { offset: 1, color: 'rgba(64,158,255,0)' },
-            ],
-          },
-        },
-      },
-      {
-        name: 'Posts',
-        type: 'scatter',
-        symbol: 'circle',
-        symbolSize: (_value: unknown, params: any) =>
-          params?.data?.postId === highlightedId ? 18 : 12,
-        itemStyle: {
-          color: (params: any) =>
-            params?.data?.postId === highlightedId ? '#f56c6c' : '#e6a23c',
-          borderColor: '#fff',
-          borderWidth: 2,
-          shadowBlur: 6,
-          shadowColor: 'rgba(230,162,60,0.4)',
-        },
-        emphasis: { scale: 1.2 },
-        z: 5,
-        data: scatterPoints.value,
-      },
-    ],
+    series,
   }
 }
 
@@ -158,7 +204,13 @@ onBeforeUnmount(() => {
 })
 
 watch(
-  () => [props.klines, props.posts, props.highlightedPostId, props.symbol],
+  () => [
+    props.klines,
+    props.posts,
+    props.prediction,
+    props.highlightedPostId,
+    props.symbol,
+  ],
   () => applyOption(),
   { deep: true },
 )

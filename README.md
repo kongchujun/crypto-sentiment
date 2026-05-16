@@ -10,6 +10,7 @@ Stage 1 (current):
 - Post timestamps appear as markers overlaid on the price chart, with stacked offsets when timestamps collide
 - Posts and chart markers are bidirectionally highlighted on click
 - X posts are returned to the UI only; they are not saved to Postgres yet
+- **Predict** sends loaded posts + 24h price stats to [OpenRouter](https://openrouter.ai); choose a model, then a dashed forecast line appears on the chart (not financial advice)
 
 ## Screenshot
 
@@ -53,10 +54,11 @@ pnpm dev
 | 24h price chart | [Binance](https://www.binance.com) public REST API | Nothing extra for local dev (`BINANCE_API_BASE` defaults to `https://api.binance.com`) |
 | X posts on demand | [twitterapi.io](https://twitterapi.io) | Sign up, copy your API key into `backend/.env` as `TWITTERAPI_IO_KEY` |
 | Saved cases | PostgreSQL | `docker compose up -d postgres` and `alembic upgrade head` |
+| AI price forecast | [OpenRouter](https://openrouter.ai) | API key in `backend/.env` as `OPENROUTER_API_KEY`; optional `OPENROUTER_MODELS` for the dropdown |
 
-**Path to the UI:** start Postgres, the backend on port 8000, and the frontend dev server on port 5173, then open http://localhost:5173. Add a case to load klines from Binance. Click **Fetch X posts**; the frontend calls `/api/cryptos/{symbol}/posts`, the backend calls twitterapi.io, and the response is shown in the list and on the chart. The Vite dev server proxies `/api` to `http://localhost:8000`.
+**Path to the UI:** start Postgres, the backend on port 8000, and the frontend dev server on port 5173, then open http://localhost:5173. Add a case to load klines from Binance. Click **Fetch X posts**; the frontend calls `/api/cryptos/{symbol}/posts`, the backend calls twitterapi.io, and the response is shown in the list and on the chart. Pick a model and click **Predict** to call `POST /api/cryptos/{symbol}/predict`; the backend asks OpenRouter for a 4-hour forecast and draws a dashed line on the chart. The Vite dev server proxies `/api` to `http://localhost:8000`.
 
-If `TWITTERAPI_IO_KEY` is empty, the same button still works but the backend serves mock post fixtures instead of calling twitterapi.io.
+If `TWITTERAPI_IO_KEY` is empty, **Fetch X posts** still works but uses mock fixtures. If `OPENROUTER_API_KEY` is empty, **Predict** returns an error asking you to set the key.
 
 ## Project layout
 

@@ -6,8 +6,9 @@ import PostDetailDrawer from '@/components/PostDetailDrawer.vue'
 import PostList from '@/components/PostList.vue'
 import PriceChart from '@/components/PriceChart.vue'
 import { fetchKlines, fetchTopPosts } from '@/api/cryptos'
+import { listPredictionModels, predictPrice } from '@/api/prediction'
 import { useCasesStore } from '@/stores/cases'
-import type { Case, KlinePoint, XPost } from '@/types'
+import type { Case, KlinePoint, PricePrediction, XPost } from '@/types'
 
 const props = defineProps<{ caseData: Case }>()
 const emit = defineEmits<{ remove: [] }>()
@@ -23,11 +24,26 @@ const hasFetchedPosts = ref(false)
 const highlightedPostId = ref<string | null>(null)
 const drawerVisible = ref(false)
 
+const prediction = ref<PricePrediction | null>(null)
+const predictLoading = ref(false)
+const modelOptions = ref<{ id: string; label: string }[]>([])
+const selectedModel = ref('')
+
 const displayName = computed(() => store.cryptoNameFor(props.caseData.symbol))
 
 const selectedPost = computed(
   () => posts.value.find((p) => p.id === highlightedPostId.value) ?? null,
 )
+
+const canPredict = computed(
+  () => hasFetchedPosts.value && posts.value.length > 0 && klines.value.length > 0,
+)
+
+const predictionAlertType = computed(() => {
+  if (!prediction.value) return 'info'
+  const map = { bullish: 'success', bearish: 'error', neutral: 'info' } as const
+  return map[prediction.value.direction]
+})
 
 const lastClose = computed(() => {
   if (klines.value.length === 0) return null
@@ -41,6 +57,16 @@ const changePct = computed(() => {
   if (first === 0) return null
   return ((last - first) / first) * 100
 })
+
+async function loadModels() {
+  try {
+    const res = await listPredictionModels()
+    modelOptions.value = res.models
+    selectedModel.value = res.default_model
+  } catch {
+    modelOptions.value = []
+  }
+}
 
 async function loadKlines() {
   klinesLoading.value = true
@@ -60,10 +86,33 @@ async function loadPosts() {
   try {
     posts.value = await fetchTopPosts(props.caseData.symbol, 5)
     hasFetchedPosts.value = true
+    prediction.value = null
   } catch (err) {
     ElMessage.error(`Failed to load posts: ${(err as Error).message}`)
   } finally {
     postsLoading.value = false
+  }
+}
+
+async function runPredict() {
+  if (!canPredict.value) {
+    ElMessage.warning('Fetch X posts first, then run Predict.')
+    return
+  }
+  predictLoading.value = true
+  try {
+    prediction.value = await predictPrice(props.caseData.symbol, {
+      model: selectedModel.value || undefined,
+      posts: posts.value,
+      klines: klines.value,
+    })
+    const p = prediction.value
+    const pct = Math.round(p.confidence * 100)
+    ElMessage.success(`${p.direction} · ${pct}% confidence (${p.model})`)
+  } catch (err) {
+    ElMessage.error(`Prediction failed: ${(err as Error).message}`)
+  } finally {
+    predictLoading.value = false
   }
 }
 
@@ -74,6 +123,7 @@ function onSelectPost(postId: string) {
 
 onMounted(() => {
   loadKlines()
+  loadModels()
 })
 </script>
 
@@ -96,6 +146,29 @@ onMounted(() => {
           </span>
         </div>
         <div class="panel__actions">
+          <el-select
+            v-model="selectedModel"
+            placeholder="Model"
+            size="default"
+            class="panel__model-select"
+            :disabled="modelOptions.length === 0"
+          >
+            <el-option
+              v-for="m in modelOptions"
+              :key="m.id"
+              :label="m.label"
+              :value="m.id"
+            />
+          </el-select>
+          <el-button
+            type="success"
+            plain
+            :loading="predictLoading"
+            :disabled="!canPredict"
+            @click="runPredict"
+          >
+            Predict
+          </el-button>
           <el-button
             type="primary"
             plain
@@ -120,6 +193,20 @@ onMounted(() => {
 
     <div class="panel__body">
       <div class="panel__chart">
+        <el-alert
+          v-if="prediction"
+          class="panel__prediction-alert"
+          :type="predictionAlertType"
+          :closable="false"
+          show-icon
+        >
+          <template #title>
+            AI prediction (not financial advice) —
+            {{ prediction.direction }}
+            · {{ Math.round(prediction.confidence * 100) }}% · {{ prediction.horizon_hours }}h
+          </template>
+          {{ prediction.summary }}
+        </el-alert>
         <el-skeleton v-if="klinesLoading && klines.length === 0" :rows="6" animated />
         <el-alert
           v-else-if="klinesError"
@@ -132,6 +219,7 @@ onMounted(() => {
           v-else
           :klines="klines"
           :posts="posts"
+          :prediction="prediction"
           :highlighted-post-id="highlightedPostId"
           :symbol="caseData.symbol"
           @select-post="onSelectPost"
@@ -205,6 +293,16 @@ onMounted(() => {
 .panel__actions {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.panel__model-select {
+  width: 160px;
+}
+
+.panel__prediction-alert {
+  margin-bottom: 12px;
 }
 
 .panel__body {
