@@ -16,7 +16,7 @@ Stage 1 (current):
 
 Two cases (BTC and SOL) tracking 24h price action with their top X posts pulled in. Orange dots on the chart mark the post timestamps; clicking a post highlights its dot, and vice versa.
 
-![Crypto Sentiment dashboard](images/img.png)
+![Crypto Sentiment dashboard](images/img1.png)
 
 ## Stack
 
